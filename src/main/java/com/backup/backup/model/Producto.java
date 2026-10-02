@@ -1,57 +1,143 @@
 package com.backup.backup.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "Producto")
+@Table(name = "producto")
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idProducto") // <--- Forzamos el nombre exacto de la BD
     private Long idProducto;
 
-    @Column(nullable = false, length = 50, unique = true)
     private String codigo;
 
-    @Column(nullable = false, length = 150)
     private String nombre;
 
-    @Column(length = 255)
     private String descripcion;
 
-    @Column(nullable = false, length = 50, name = "unidadMedida") // <--- Por si acaso
     private String unidadMedida;
 
-    @Column(nullable = false)
-    private Boolean estado = true;
+    private Boolean estado;
 
-    // Relación con Categoría apuntando al campo exacto
     @ManyToOne
-    @JoinColumn(name = "idCategoria", nullable = false) // <--- Apunta a idCategoria sin guion bajo
+    @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
-    // Constructores, Getters y Setters
-    public Producto() {}
+    @OneToMany(mappedBy = "producto")
+    private List<Existencia> existencias;
 
-    public Long getIdProducto() { return idProducto; }
-    public void setIdProducto(Long idProducto) { this.idProducto = idProducto; }
+    @OneToMany(mappedBy = "producto")
+    private List<DetalleEntrada> detallesEntrada;
 
-    public String getCodigo() { return codigo; }
-    public void setCodigo(String codigo) { this.codigo = codigo; }
+    @OneToMany(mappedBy = "producto")
+    private List<DetalleSolicitud> detallesSolicitud;
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    @OneToMany(mappedBy = "producto")
+    private List<DetalleEntrega> detallesEntrega;
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public Producto() {
+    }
 
-    public String getUnidadMedida() { return unidadMedida; }
-    public void setUnidadMedida(String unidadMedida) { this.unidadMedida = unidadMedida; }
+    public Producto(Long idProducto, String codigo, String nombre,
+                    String descripcion, String unidadMedida,
+                    Boolean estado, Categoria categoria) {
 
-    public Boolean getEstado() { return estado; }
-    public void setEstado(Boolean estado) { this.estado = estado; }
+        this.idProducto = idProducto;
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.unidadMedida = unidadMedida;
+        this.estado = estado;
+        this.categoria = categoria;
+    }
 
-    public Categoria getCategoria() { return categoria; }
-    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
+    public Long getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getUnidadMedida() {
+        return unidadMedida;
+    }
+
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<Existencia> getExistencias() {
+        return existencias;
+    }
+
+    public void setExistencias(List<Existencia> existencias) {
+        this.existencias = existencias;
+    }
+
+    public List<DetalleEntrada> getDetallesEntrada() {
+        return detallesEntrada;
+    }
+
+    public void setDetallesEntrada(List<DetalleEntrada> detallesEntrada) {
+        this.detallesEntrada = detallesEntrada;
+    }
+
+    public List<DetalleSolicitud> getDetallesSolicitud() {
+        return detallesSolicitud;
+    }
+
+    public void setDetallesSolicitud(List<DetalleSolicitud> detallesSolicitud) {
+        this.detallesSolicitud = detallesSolicitud;
+    }
+
+    public List<DetalleEntrega> getDetallesEntrega() {
+        return detallesEntrega;
+    }
+
+    public void setDetallesEntrega(List<DetalleEntrega> detallesEntrega) {
+        this.detallesEntrega = detallesEntrega;
+    }
 }

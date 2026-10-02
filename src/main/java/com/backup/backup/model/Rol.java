@@ -1,15 +1,14 @@
 package com.backup.backup.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria {
+@Table(name = "rol")
+public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCategoria;
+    private Long idRol;
 
     private String nombre;
 
@@ -17,27 +16,23 @@ public class Categoria {
 
     private Boolean estado;
 
-    @OneToMany(mappedBy = "categoria")
-    private List<Producto> productos;
-
-    public Categoria() {
+    public Rol() {
     }
 
-    public Categoria(Long idCategoria, String nombre,
-                     String descripcion, Boolean estado) {
-
-        this.idCategoria = idCategoria;
+    public Rol(Long idRol, String nombre, String descripcion,
+               Boolean estado) {
+        this.idRol = idRol;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;
     }
 
-    public Long getIdCategoria() {
-        return idCategoria;
+    public Long getIdRol() {
+        return idRol;
     }
 
-    public void setIdCategoria(Long idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setIdRol(Long idRol) {
+        this.idRol = idRol;
     }
 
     public String getNombre() {
@@ -62,13 +57,5 @@ public class Categoria {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
     }
 }

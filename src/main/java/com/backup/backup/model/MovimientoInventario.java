@@ -9,37 +9,42 @@ public class MovimientoInventario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_movimiento")
     private Long idMovimiento;
 
-    @Column(name = "tipo_movimiento", nullable = false, length = 50)
     private String tipoMovimiento;
 
-    @Column(name = "cantidad", nullable = false)
     private Integer cantidad;
 
-    @Column(name = "fecha_movimiento", nullable = false)
     private LocalDateTime fechaMovimiento;
 
-    @Column(name = "descripcion", length = 255)
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "id_producto")
-    private Producto producto;
+    @JoinColumn(name = "id_existencia")
+    private Existencia existencia;
 
-    // Constructores vacíos y con parámetros
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
     public MovimientoInventario() {
     }
 
-    public MovimientoInventario(String tipoMovimiento, Integer cantidad, LocalDateTime fechaMovimiento, String descripcion) {
+    public MovimientoInventario(Long idMovimiento, String tipoMovimiento,
+                                Integer cantidad,
+                                LocalDateTime fechaMovimiento,
+                                String descripcion,
+                                Existencia existencia,
+                                Usuario usuario) {
+        this.idMovimiento = idMovimiento;
         this.tipoMovimiento = tipoMovimiento;
         this.cantidad = cantidad;
         this.fechaMovimiento = fechaMovimiento;
         this.descripcion = descripcion;
+        this.existencia = existencia;
+        this.usuario = usuario;
     }
 
-    // Getters y Setters
     public Long getIdMovimiento() {
         return idMovimiento;
     }
@@ -80,11 +85,19 @@ public class MovimientoInventario {
         this.descripcion = descripcion;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public Existencia getExistencia() {
+        return existencia;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setExistencia(Existencia existencia) {
+        this.existencia = existencia;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
