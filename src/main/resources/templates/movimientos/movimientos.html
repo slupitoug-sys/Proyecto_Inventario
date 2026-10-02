@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de Movimientos - CoreStock</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #2c3e50;
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .badge-entrada {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        .badge-salida {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .footer-note {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Historial de Movimientos de Inventario</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Bucle de Thymeleaf para recorrer la lista de movimientos -->
+            <tr th:each="movimiento : ${movimientos}">
+                <td th:text="${movimiento.idMovimiento}">1</td>
+                <td>
+                    <span th:text="${movimiento.tipoMovimiento}" class="badge badge-entrada">Entrada</span>
+                </td>
+                <td th:text="${movimiento.cantidad}">0</td>
+                <td th:text="${movimiento.fechaMovimiento}">2026-10-01</td>
+                <td th:text="${movimiento.descripcion}">Sin descripción</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer-note">
+        CoreStock Management System &bull; Módulo de Movimientos
+    </div>
+</div>
+
+</body>
+</html>

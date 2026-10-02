@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel - Stock Core</title>
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #f1f5f9;
+            --navbar-bg: #1e293b;
+            --menu-bg: #ffffff;
+            --card-shadow: rgba(0,0,0,0.04);
+        }
+
+        body.dark-mode {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --navbar-bg: #090d16;
+            --menu-bg: #1e293b;
+            --card-shadow: rgba(0,0,0,0.25);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .top-navbar {
+            background-color: var(--navbar-bg);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .brand { font-size: 20px; font-weight: bold; }
+        .navbar-right { display: flex; align-items: center; gap: 15px; }
+
+        .btn-theme {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .btn-theme:hover { background: rgba(255, 255, 255, 0.2); }
+
+        .main-menu {
+            background-color: var(--menu-bg);
+            padding: 0 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 20px;
+        }
+        .main-menu a { text-decoration: none; color: var(--text-secondary); font-weight: 600; padding: 15px 10px; border-bottom: 3px solid transparent; }
+        .main-menu a:hover, .main-menu a.active { color: #2563eb; border-bottom: 3px solid #2563eb; }
+
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .page-header { margin-bottom: 25px; }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px var(--card-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .card h3 {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .card .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-navbar">
+        <div class="brand">📦 STOCK CORE</div>
+        <div class="navbar-right">
+            <button class="btn-theme" id="themeToggle" onclick="toggleTheme()">🌙 Modo Oscuro</button>
+        </div>
+    </div>
+
+    <div class="main-menu">
+        <a th:href="@{/panel}" class="active">INICIO</a>
+        <a th:href="@{/inventario}">INVENTARIO</a>
+        <a href="#">ENTRADAS</a>
+        <a href="#">SALIDAS</a>
+        <a href="#">REPORTES</a>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Panel Principal</h1>
+        </div>
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>Total Productos</h3>
+                <div class="value">365</div>
+            </div>
+            <div class="card">
+                <h3>Entradas Hoy</h3>
+                <div class="value">14</div>
+            </div>
+            <div class="card">
+                <h3>Salidas Hoy</h3>
+                <div class="value">8</div>
+            </div>
+            <div class="card">
+                <h3>Stock Bajo</h3>
+                <div class="value" style="color: #d97706;">3</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cargar el tema guardado al abrir la página
+        window.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('themeToggle');
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                if (btn) btn.textContent = '☀️ Modo Claro';
+            } else {
+                if (btn) btn.textContent = '🌙 Modo Oscuro';
+            }
+        });
+
+        // Alternar tema y guardar en memoria
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeToggle');
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                if (btn) btn.textContent = '☀️ Modo Claro';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                if (btn) btn.textContent = '🌙 Modo Oscuro';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+    </script>
+</body>
+</html>
