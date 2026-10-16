@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Formulario de Proveedor</title>
+</head>
+<body>
+
+<h1 th:text="${titulo}">Registrar proveedor</h1>
+
+<form th:action="@{/proveedores/guardar}" th:object="${proveedor}" method="post">
+
+    <input type="hidden" th:field="*{idProveedor}">
+
+    <div>
+        <label for="nombreComercial">Nombre comercial:</label>
+        <input type="text" id="nombreComercial" th:field="*{nombreComercial}">
+        <p th:if="${#fields.hasErrors('nombreComercial')}"
+           th:errors="*{nombreComercial}"></p>
+    </div>
+
+    <div>
+        <label for="nit">NIT:</label>
+        <input type="text" id="nit" th:field="*{nit}">
+        <p th:if="${#fields.hasErrors('nit')}"
+           th:errors="*{nit}"></p>
+    </div>
+
+    <div>
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" th:field="*{telefono}">
+        <p th:if="${#fields.hasErrors('telefono')}"
+           th:errors="*{telefono}"></p>
+    </div>
+
+    <div>
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" th:field="*{correo}">
+        <p th:if="${#fields.hasErrors('correo')}"
+           th:errors="*{correo}"></p>
+    </div>
+
+    <div>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" th:field="*{direccion}">
+        <p th:if="${#fields.hasErrors('direccion')}"
+           th:errors="*{direccion}"></p>
+    </div>
+
+    <div>
+        <label for="estado">Estado:</label>
+        <select id="estado" th:field="*{estado}">
+            <option th:value="true">Activo</option>
+            <option th:value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/proveedores}">Cancelar</a>
+
+</form>
+
+</body>
+</html>

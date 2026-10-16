@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Formulario de Categoría</title>
+</head>
+<body>
+
+<h1 th:text="${titulo}">Registrar categoría</h1>
+
+<form th:action="@{/categorias/guardar}" th:object="${categoria}" method="post">
+
+    <input type="hidden" th:field="*{idCategoria}">
+
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}">
+        <p th:if="${#fields.hasErrors('nombre')}"
+           th:errors="*{nombre}"></p>
+    </div>
+
+    <div>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" th:field="*{descripcion}">
+        <p th:if="${#fields.hasErrors('descripcion')}"
+           th:errors="*{descripcion}"></p>
+    </div>
+
+    <div>
+        <label for="estado">Estado:</label>
+        <select id="estado" th:field="*{estado}">
+            <option th:value="true">Activo</option>
+            <option th:value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/categorias}">Cancelar</a>
+
+</form>
+
+</body>
+</html>

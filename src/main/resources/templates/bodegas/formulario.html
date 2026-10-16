@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Formulario de Bodega</title>
+</head>
+<body>
+
+<h1 th:text="${titulo}">Registrar bodega</h1>
+
+<form th:action="@{/bodegas/guardar}" th:object="${bodega}" method="post">
+
+    <input type="hidden" th:field="*{idBodega}">
+
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}">
+        <p th:if="${#fields.hasErrors('nombre')}"
+           th:errors="*{nombre}"></p>
+    </div>
+
+    <div>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" th:field="*{descripcion}">
+        <p th:if="${#fields.hasErrors('descripcion')}"
+           th:errors="*{descripcion}"></p>
+    </div>
+
+    <div>
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" th:field="*{ubicacion}">
+        <p th:if="${#fields.hasErrors('ubicacion')}"
+           th:errors="*{ubicacion}"></p>
+    </div>
+
+    <div>
+        <label for="estado">Estado:</label>
+        <select id="estado" th:field="*{estado}">
+            <option th:value="true">Activo</option>
+            <option th:value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/bodegas}">Cancelar</a>
+
+</form>
+
+</body>
+</html>

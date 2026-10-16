@@ -1,4 +1,4 @@
-package com.backup.service;
+package com.backup.backup.service;
 
 import com.backup.backup.model.Producto;
 import com.backup.backup.repository.ProductoRepository;

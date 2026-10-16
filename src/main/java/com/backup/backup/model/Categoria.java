@@ -1,6 +1,7 @@
 package com.backup.backup.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -11,6 +12,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategoria;
 
+    @NotBlank(message = "El nombre de la categoría es obligatorio")
     private String nombre;
 
     private String descripcion;
@@ -25,7 +27,6 @@ public class Categoria {
 
     public Categoria(Long idCategoria, String nombre,
                      String descripcion, Boolean estado) {
-
         this.idCategoria = idCategoria;
         this.nombre = nombre;
         this.descripcion = descripcion;

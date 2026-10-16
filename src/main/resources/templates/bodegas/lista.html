@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Bodegas</title>
+</head>
+<body>
+
+<h1>Listado de Bodegas</h1>
+
+<a th:href="@{/bodegas/nueva}">Nueva bodega</a>
+
+<div th:if="${mensaje}">
+    <p th:text="${mensaje}"></p>
+</div>
+
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Ubicación</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="bodega : ${bodegas}">
+        <td th:text="${bodega.idBodega}"></td>
+        <td th:text="${bodega.nombre}"></td>
+        <td th:text="${bodega.descripcion}"></td>
+        <td th:text="${bodega.ubicacion}"></td>
+        <td th:text="${bodega.estado ? 'Activo' : 'Inactivo'}"></td>
+        <td>
+            <a th:href="@{/bodegas/editar/{id}(id=${bodega.idBodega})}">
+                Editar
+            </a>
+
+            <form th:action="@{/bodegas/eliminar/{id}(id=${bodega.idBodega})}"
+                  method="post"
+                  style="display:inline;">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.backup.service;
+package com.backup.backup.service;
 
 import com.backup.backup.model.MovimientoInventario;
 import com.backup.backup.repository.MovimientoInventarioRepository;

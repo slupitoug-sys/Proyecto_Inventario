@@ -1,6 +1,7 @@
 package com.backup.backup.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "proveedor")
@@ -10,6 +11,7 @@ public class Proveedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProveedor;
 
+    @NotBlank(message = "El nombre comercial es obligatorio")
     private String nombreComercial;
 
     private String nit;
