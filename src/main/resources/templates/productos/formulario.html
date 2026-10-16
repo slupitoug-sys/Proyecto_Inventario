@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Formulario de Producto</title>
+</head>
+<body>
+
+<h1 th:text="${titulo}">Registrar producto</h1>
+
+<form th:action="@{/productos/guardar}" th:object="${producto}" method="post">
+
+    <input type="hidden" th:field="*{idProducto}">
+
+    <div>
+        <label for="codigo">Código:</label>
+        <input type="text" id="codigo" th:field="*{codigo}">
+        <p th:if="${#fields.hasErrors('codigo')}"
+           th:errors="*{codigo}"></p>
+    </div>
+
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}">
+        <p th:if="${#fields.hasErrors('nombre')}"
+           th:errors="*{nombre}"></p>
+    </div>
+
+    <div>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" th:field="*{descripcion}">
+        <p th:if="${#fields.hasErrors('descripcion')}"
+           th:errors="*{descripcion}"></p>
+    </div>
+
+    <div>
+        <label for="unidadMedida">Unidad de medida:</label>
+        <input type="text" id="unidadMedida" th:field="*{unidadMedida}">
+        <p th:if="${#fields.hasErrors('unidadMedida')}"
+           th:errors="*{unidadMedida}"></p>
+    </div>
+
+    <div>
+        <label for="estado">Estado:</label>
+        <select id="estado" th:field="*{estado}">
+            <option th:value="true">Activo</option>
+            <option th:value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" th:field="*{categoria}">
+            <option value="">Seleccione una categoría</option>
+            <option th:each="categoria : ${categorias}"
+                    th:value="${categoria.idCategoria}"
+                    th:text="${categoria.nombre}">
+            </option>
+        </select>
+        <p th:if="${#fields.hasErrors('categoria')}"
+           th:errors="*{categoria}"></p>
+    </div>
+
+    <button type="submit">Guardar</button>
+    <a th:href="@{/productos}">Cancelar</a>
+
+</form>
+
+</body>
+</html>

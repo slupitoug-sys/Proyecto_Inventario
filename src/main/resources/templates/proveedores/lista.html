@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Proveedores</title>
+</head>
+<body>
+
+<h1>Listado de Proveedores</h1>
+
+<a th:href="@{/proveedores/nuevo}">Nuevo proveedor</a>
+
+<div th:if="${mensaje}">
+    <p th:text="${mensaje}"></p>
+</div>
+
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre comercial</th>
+        <th>NIT</th>
+        <th>Teléfono</th>
+        <th>Correo</th>
+        <th>Dirección</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="proveedor : ${proveedores}">
+        <td th:text="${proveedor.idProveedor}"></td>
+        <td th:text="${proveedor.nombreComercial}"></td>
+        <td th:text="${proveedor.nit}"></td>
+        <td th:text="${proveedor.telefono}"></td>
+        <td th:text="${proveedor.correo}"></td>
+        <td th:text="${proveedor.direccion}"></td>
+        <td th:text="${proveedor.estado ? 'Activo' : 'Inactivo'}"></td>
+        <td>
+            <a th:href="@{/proveedores/editar/{id}(id=${proveedor.idProveedor})}">
+                Editar
+            </a>
+
+            <form th:action="@{/proveedores/eliminar/{id}(id=${proveedor.idProveedor})}"
+                  method="post"
+                  style="display:inline;">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

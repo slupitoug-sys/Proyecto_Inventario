@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Categorías</title>
+</head>
+<body>
+
+<h1>Listado de Categorías</h1>
+
+<a th:href="@{/categorias/nueva}">Nueva categoría</a>
+
+<div th:if="${mensaje}">
+    <p th:text="${mensaje}"></p>
+</div>
+
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="categoria : ${categorias}">
+        <td th:text="${categoria.idCategoria}"></td>
+        <td th:text="${categoria.nombre}"></td>
+        <td th:text="${categoria.descripcion}"></td>
+        <td th:text="${categoria.estado ? 'Activo' : 'Inactivo'}"></td>
+        <td>
+            <a th:href="@{/categorias/editar/{id}(id=${categoria.idCategoria})}">
+                Editar
+            </a>
+
+            <form th:action="@{/categorias/eliminar/{id}(id=${categoria.idCategoria})}"
+                  method="post"
+                  style="display:inline;">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

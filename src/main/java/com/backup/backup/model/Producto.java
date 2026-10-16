@@ -1,6 +1,8 @@
 package com.backup.backup.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,18 +13,23 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProducto;
 
+    @NotBlank(message = "El código es obligatorio")
     private String codigo;
 
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
     private String descripcion;
 
+    @NotBlank(message = "La unidad de medida es obligatoria")
     private String unidadMedida;
 
+    @NotNull(message = "El estado es obligatorio")
     private Boolean estado;
 
     @ManyToOne
-    @JoinColumn(name = "id_categoria")
+    @JoinColumn(name = "idCategoria")
+    @NotNull(message = "La categoría es obligatoria")
     private Categoria categoria;
 
     @OneToMany(mappedBy = "producto")
